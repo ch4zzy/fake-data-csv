@@ -32,7 +32,6 @@ class ColumnForm(forms.ModelForm):
 
     class Meta:
         model = Column
-        exclude = ("id",)
         fields = (
             "name",
             "order",
