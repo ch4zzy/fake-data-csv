@@ -1,0 +1,30 @@
+{% extends "fakecsv/base.html" %}
+
+{% block title %}
+    Schema List
+{% endblock title %}
+
+{% block content %}
+    <h2>Schema List</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Owner</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for schema in schema %}
+            <tr>
+                <td>{{ schema.name }}</td>
+                <td>{{ schema.owner.username }}</td>
+                <td>
+                    <a href="{% url 'fakecsv:edit_schema' pk=schema.pk %}">Edit</a>
+                    <a href="{% url 'fakecsv:delete_schema' pk=schema.pk %}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
