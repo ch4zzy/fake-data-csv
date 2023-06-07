@@ -1,6 +1,6 @@
 from django.urls import include, path
 
-from apps.fakecsv.views import create_schema, delete_schema, edit_schema, schema_list
+from apps.fakecsv.views import create_schema, delete_schema, edit_schema, schema_list, delete_column
 
 app_name = "fakecsv"
 
@@ -9,5 +9,6 @@ urlpatterns = [
     path("create-schema/", create_schema, name="create_schema"),
     path("edit-schema/<int:pk>/", edit_schema, name="edit_schema"),
     path("delete-schema/<int:pk>/", delete_schema, name="delete_schema"),
+    path("delete-column/<int:pk>/", delete_column, name="delete_column"),
     path("list/", schema_list, name="schema_list"),
 ]
