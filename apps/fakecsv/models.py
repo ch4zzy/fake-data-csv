@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse
 
 from apps.fakecsv.constants import DataType, Delimiter, QuoteCharacter, Status
 
@@ -27,6 +28,9 @@ class Column(models.Model):
     order = models.PositiveIntegerField()
     data_range_from = models.IntegerField(blank=True, null=True, verbose_name="from")
     data_range_to = models.IntegerField(blank=True, null=True, verbose_name="to")
+
+    def get_absolute_url(self):
+        return reverse("fakecsv:delete_column", kwargs={"id": self.id})
 
 
 class DataSet(models.Model):
