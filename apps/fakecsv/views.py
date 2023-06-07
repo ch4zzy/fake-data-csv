@@ -65,7 +65,7 @@ def delete_column(request, pk):
 @login_required
 def edit_schema(request, pk):
     schema = Schema.objects.get(pk=pk)
-    ColumnFormSet = inlineformset_factory(Schema, Column, form=ColumnForm, extra=0)
+    ColumnFormSet = inlineformset_factory(Schema, Column, form=ColumnForm, extra=1, can_delete=True)
     formset_prefix = "column"
     if request.method == "POST":
         form = SchemaForm(request.POST, instance=schema)
@@ -75,11 +75,7 @@ def edit_schema(request, pk):
             if "action" in request.POST and request.POST["action"] == "submit":
                 form.save()
                 formset.save()
-                return redirect("fakecsv:schema_list")
-        else:
-            for form_field in formset:
-                if form_field.errors:
-                    print(form_field.errors)
+                return redirect("fakecsv:edit_schema", pk=schema.pk)
     else:
         form = SchemaForm(instance=schema)
         formset = ColumnFormSet(instance=schema, prefix=formset_prefix)
