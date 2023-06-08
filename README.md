@@ -32,14 +32,35 @@ FakeCSV is a web application for generating fake CSV datasets based on custom sc
 ### Create and Manage Schemas
 
 - Create a new schema by providing a name and defining the columns with their respective data types and ranges.
+- Path: `/create-schema/`
 - Edit an existing schema to modify its name, columns, or column properties.
+- Path: `/edit-schema/<int:pk>/`
 - Delete a schema and all associated datasets.
+- Path: `/delete-schema/<int:pk>/`
+
+### Manage Columns
+
+- Delete a column from a schema.
+- Path: `/delete-column/<int:pk>/`
+
+### View Schema Details
+
+- View detailed information about a schema, including its columns and generated datasets.
+- Path: `/detail-schema/<int:pk>/`
 
 ### Generate Datasets
 
-- Generate a dataset for a schema by specifying the number of rows. The dataset will be processed and available for download.
-- Download a generated dataset in CSV format.
+- Download generated datasets
+- Path: `/download_data_set/<int:pk>/`
+### View Schema List
+
+- View a list of all created schemas.
+- Path: `/list/`
 
 ## Contributing
 
 Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
