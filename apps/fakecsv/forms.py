@@ -57,3 +57,9 @@ class DataSetForm(forms.ModelForm):
     class Meta:
         model = DataSet
         fields = "__all__"
+
+        widgets = {
+            "status": forms.HiddenInput(),
+            "schema": forms.HiddenInput(),
+            "file": forms.HiddenInput(),
+        }
