@@ -1,0 +1,81 @@
+{% extends "fakecsv/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Schema detail
+{% endblock title %}
+
+{% block content %}
+<div class="container py-4">
+    <h2>Sample schema</h2>
+    <div class="d-flex justify-content-end">
+        <a href="{% url 'fakecsv:edit_schema' pk=schema.pk %}" class="btn btn-success">Edit schema</a>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Column name</th>
+                <th>Column type</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for column in column %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ column.name }}</td>
+                <td>{{ column.data_type }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="container py-4">
+    <h2>Data sets</h2>
+    <form action="." method="post" style="display: flex;">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group" style="margin-top: 3px;">
+            <label for="{{ field.id_for_label }}"></label>
+            {{ field }}
+            {% if field.errors %}
+            <div class="text-danger">
+                {% for error in field.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+        <button class="btn btn-dark" name="action" type="submit" value="submit" style="margin-left: 10px;">Generate
+            data
+        </button>
+    </form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Created</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for set in dataset %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ set.created }}</td>
+                <td>{{ set.status }}</td>
+                <td>
+                    {% if set.file %}
+                    <a href="{% url 'fakecsv:download_data_set' set.id %}" class="btn btn-link">Download file</a>
+                    {% else %}
+                    -
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}
