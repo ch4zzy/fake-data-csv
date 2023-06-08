@@ -5,6 +5,10 @@ from apps.fakecsv.constants import DataType, Delimiter, QuoteCharacter, Status
 
 
 class Schema(models.Model):
+    """
+    Model representing a schema for a CSV file.
+    """
+
     name = models.CharField(max_length=255)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
@@ -21,6 +25,10 @@ class Schema(models.Model):
 
 
 class Column(models.Model):
+    """
+    Model representing a column within a schema for a CSV file.
+    """
+
     name = models.CharField(max_length=100)
     schema = models.ForeignKey(Schema, on_delete=models.CASCADE, related_name="columns")
     data_type = models.CharField(max_length=12, choices=DataType.choices)
@@ -28,11 +36,12 @@ class Column(models.Model):
     data_range_from = models.IntegerField(blank=True, null=True, verbose_name="from")
     data_range_to = models.IntegerField(blank=True, null=True, verbose_name="to")
 
-    # def get_absolute_url(self):
-    # return reverse("fakecsv:delete_column", kwargs={"id": self.id})
-
 
 class DataSet(models.Model):
+    """
+    Model representing a dataset (CSV file) associated with a schema.
+    """
+
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=Status.choices, default=Status.PROCESSING)
