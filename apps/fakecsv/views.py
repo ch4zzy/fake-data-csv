@@ -1,13 +1,21 @@
 from django.contrib.auth.decorators import login_required
 from django.forms import inlineformset_factory
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.text import slugify
 
-from apps.fakecsv.forms import ColumnForm, SchemaForm
+from apps.fakecsv.constants import Status
+from apps.fakecsv.forms import ColumnForm, DataSet, DataSetForm, SchemaForm
 from apps.fakecsv.models import Column, Schema
+from apps.fakecsv.utils import generate_data_set
 
 
 @login_required
 def schema_list(request):
+    """
+    View for displaying a list of schemas owned by the user.
+    """
+
     user = request.user
     schema = Schema.objects.filter(owner=user.id)
     return render(
@@ -21,6 +29,10 @@ def schema_list(request):
 
 @login_required
 def create_schema(request):
+    """
+    View for creating a new schema for a CSV file.
+    """
+
     if request.method == "POST":
         form = SchemaForm(request.POST)
         if form.is_valid():
@@ -50,6 +62,9 @@ def create_schema(request):
 
 @login_required
 def delete_schema(request, pk):
+    """
+    View for deleting a schema for a CSV file.
+    """
     schema = get_object_or_404(Schema, pk=pk, owner=request.user)
     schema.delete()
     return redirect("fakecsv:schema_list")
@@ -57,6 +72,10 @@ def delete_schema(request, pk):
 
 @login_required
 def delete_column(request, pk):
+    """
+    View for deleting a column in a CSV file schema.
+    """
+
     column = get_object_or_404(Column, pk=pk)
     column.delete()
     return redirect("fakecsv:schema_list")
@@ -64,7 +83,11 @@ def delete_column(request, pk):
 
 @login_required
 def edit_schema(request, pk):
-    schema = Schema.objects.get(pk=pk)
+    """
+    View for editing a schema for a CSV file.
+    """
+
+    schema = Schema.objects.select_related("owner").get(pk=pk)
     ColumnFormSet = inlineformset_factory(Schema, Column, form=ColumnForm, extra=1, can_delete=True)
     formset_prefix = "column"
     if request.method == "POST":
@@ -85,3 +108,56 @@ def edit_schema(request, pk):
         "formset": formset,
     }
     return render(request, "fakecsv/schema/new_schema.html", context)
+
+
+@login_required
+def detail_schema(request, pk):
+    """
+    View for displaying details of a schema for a CSV file.
+    """
+
+    schema = Schema.objects.select_related("owner").get(pk=pk)
+    column = schema.columns.all().order_by("order")
+    form = DataSetForm()
+    dataset = schema.data_sets.all()
+    if request.method == "POST":
+        form = DataSetForm(request.POST, instance=schema)
+        if form.is_valid():
+            if "action" in request.POST and request.POST["action"] == "submit":
+                dataset = form.save(commit=False)
+                dataset.schema = schema
+                dataset.status = Status.PROCESSING
+                dataset.save()
+                number_of_rows = form.cleaned_data["number_of_rows"]
+                generate_data_set(schema, number_of_rows=number_of_rows)
+                return redirect("fakecsv:detail_schema", pk=schema.pk)
+    else:
+        initial_data = {
+            "schema": schema,
+            "status": Status.PROCESSING,
+        }
+        form = DataSetForm(initial=initial_data)
+
+    context = {
+        "schema": schema,
+        "column": column,
+        "form": form,
+        "dataset": dataset,
+    }
+
+    return render(request, "fakecsv/schema/schema_detail.html", context)
+
+
+@login_required
+def download_data_set(request, data_set_id):
+    """
+    View for downloading a generated dataset for a CSV file.
+    """
+
+    data_set = get_object_or_404(DataSet, id=data_set_id)
+    file_path = data_set.file.path
+
+    with open(file_path, "rb") as f:
+        response = HttpResponse(f.read(), content_type="text/csv")
+        response["Content-Disposition"] = f"attachment; filename={slugify(data_set.schema.name)}.csv"
+        return response
