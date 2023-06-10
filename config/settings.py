@@ -17,7 +17,7 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = env.bool("DEBUG")
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["chazzy.pythonanywhere.com", "127.0.0.1"]
 
 
 # Application definition
@@ -33,7 +33,6 @@ INSTALLED_APPS = [
     "bootstrap5",
     "crispy_forms",
     "crispy_bootstrap5",
-    "silk",
 ]
 
 MIDDLEWARE = [
@@ -44,7 +43,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "silk.middleware.SilkyMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -112,6 +110,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 
 STATIC_URL = "/static/"
+STATICFILES_DIRS = os.path.join(BASE_DIR, "static")
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles_build", "static")
 
 LOGIN_REDIRECT_URL = "/list/"
 LOGOUT_REDIRECT_URL = "/login/"
