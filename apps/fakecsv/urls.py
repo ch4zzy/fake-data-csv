@@ -1,4 +1,5 @@
 from django.urls import include, path
+from django.views.generic.base import RedirectView
 
 from apps.fakecsv.views import (
     create_schema,
@@ -13,6 +14,7 @@ from apps.fakecsv.views import (
 app_name = "fakecsv"
 
 urlpatterns = [
+    path("", RedirectView.as_view(url="/login/", permanent=True)),
     path("", include("django.contrib.auth.urls")),
     path("create-schema/", create_schema, name="create_schema"),
     path("edit-schema/<int:pk>/", edit_schema, name="edit_schema"),
