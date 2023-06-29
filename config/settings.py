@@ -138,7 +138,7 @@ AWS_S3_FILE_OVERWRITE = env.bool("AWS_S3_FILE_OVERWRITE")
 
 # static settings
 
-AWS_S3_CUSTOM_DOMAIN = "%s.s3.amazonaws.com" % AWS_STORAGE_BUCKET_NAME
+AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
 AWS_S3_OBJECT_PARAMETERS = {
     "CacheControl": "max-age=86400",
 }
@@ -148,6 +148,6 @@ STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 
 # media settings
-
-MEDIA_URL = "https://{}/{}/".format(AWS_S3_CUSTOM_DOMAIN, "media")
+MEDIA_LOCATION = "media"
+MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/"
 DEFAULT_FILE_STORAGE = "config.storage_backends.MediaStorage"
