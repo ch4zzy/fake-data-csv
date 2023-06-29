@@ -2,7 +2,6 @@ import csv
 import os
 from datetime import datetime
 
-from django.conf import settings
 from django.core.files.storage import default_storage
 from faker import Faker
 
@@ -56,7 +55,7 @@ def generate_data_set(schema: Schema, number_of_rows: int) -> None:
     columns = schema.columns.all()
 
     filename = f"{schema.name}_{number_of_rows}_{datetime.now().isoformat()}.csv"
-    with default_storage.open(os.path.join(settings.MEDIA_ROOT, filename), "w") as f:
+    with default_storage.open(os.path.join(filename), "w") as f:
         writer = csv.DictWriter(f, fieldnames=[c.name for c in columns], dialect="custom")
         writer.writeheader()
         for i in range(number_of_rows):

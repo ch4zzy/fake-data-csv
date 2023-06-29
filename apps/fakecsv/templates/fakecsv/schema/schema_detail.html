@@ -68,7 +68,7 @@ Schema detail
                 <td>{{ set.status }}</td>
                 <td>
                     {% if set.file %}
-                    <a href="{% url 'fakecsv:download_data_set' set.id %}" class="btn btn-link">Download file</a>
+                    <a href="{{ set.file.url }}" class="btn btn-link">Download file</a>
                     {% else %}
                     -
                     {% endif %}
