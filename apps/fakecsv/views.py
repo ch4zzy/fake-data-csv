@@ -115,8 +115,10 @@ def detail_schema(request, pk):
     """
     View for displaying details of a schema for a CSV file.
     """
-
-    schema = Schema.objects.select_related("owner").get(pk=pk)
+    try:
+        schema = Schema.objects.select_related("owner").get(pk=pk)
+    except Schema.DoesNotExist:
+        return redirect("fakecsv:schema_list")
     column = schema.columns.all().order_by("order")
     form = DataSetForm()
     dataset = schema.data_sets.all()
