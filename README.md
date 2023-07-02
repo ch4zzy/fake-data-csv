@@ -9,7 +9,8 @@ http://chazzy.pythonanywhere.com/
 - Define columns with specific data types and ranges
 - Generate fake datasets based on the defined schemas
 - Download generated datasets in CSV format
-- The files(static for admin and media) are stored on AWS s3.
+- The files(static for admin and media) are stored on **AWS S3**.
+- Errors tracking by **sentry.io**.
 
 ## Installation
 
