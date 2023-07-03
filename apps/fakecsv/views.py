@@ -1,13 +1,15 @@
 from django.contrib.auth.decorators import login_required
 from django.forms import inlineformset_factory
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.text import slugify
 
 from apps.fakecsv.constants import Status
 from apps.fakecsv.forms import ColumnForm, DataSet, DataSetForm, SchemaForm
 from apps.fakecsv.models import Column, Schema
-from apps.fakecsv.utils import generate_data_set
+from apps.fakecsv.utils import generate_data_set, check_file_exists
+import os
+from django.conf import settings
 
 
 @login_required
@@ -131,7 +133,13 @@ def detail_schema(request, pk):
                 dataset.status = Status.PROCESSING
                 dataset.save()
                 number_of_rows = form.cleaned_data["number_of_rows"]
-                generate_data_set(schema, number_of_rows=number_of_rows)
+                
+                filename = generate_data_set(schema, number_of_rows=number_of_rows)
+                file_key = 'media/' + filename
+                file_exists = check_file_exists(settings.AWS_STORAGE_BUCKET_NAME, file_key)
+
+                if not file_exists:
+                    return HttpResponse("File does not exist", status=404)
                 return redirect("fakecsv:detail_schema", pk=schema.pk)
     else:
         initial_data = {
