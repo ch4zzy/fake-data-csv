@@ -1,5 +1,5 @@
 # FakeCSV
-
+![action status](https://github.com/ch4zzy/fake-data-csv/actions/workflows/django.yml/badge.svg)
 FakeCSV is a web application for generating fake CSV datasets based on custom schemas.
 http://chazzy.pythonanywhere.com/
 
