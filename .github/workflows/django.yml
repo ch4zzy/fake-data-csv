@@ -57,5 +57,5 @@ jobs:
         AWS_S3_VERITY: ${{ secrets.AWS_S3_VERITY }}
         DEFAULT_FILE_STORAGE: ${{ secrets.DEFAULT_FILE_STORAGE }}
         SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
-      run: |
+      run: 
         pytest
