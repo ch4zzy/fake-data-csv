@@ -2,12 +2,12 @@ import csv
 import os
 from datetime import datetime
 
+import boto3
 from django.core.files.storage import default_storage
 from faker import Faker
 
 from apps.fakecsv.constants import DataType, Status
 from apps.fakecsv.models import DataSet, Schema
-import boto3
 
 
 def fakedata_generator(data_type, value_range):
@@ -75,10 +75,10 @@ def generate_data_set(schema: Schema, number_of_rows: int) -> None:
 
 
 def check_file_exists(bucket_name, file_key):
-    s3 = boto3.client('s3')
-    
+    s3 = boto3.client("s3")
+
     try:
         response = s3.head_object(Bucket=bucket_name, Key=file_key)
         return True
-    except Exception as e:
+    except Exception:
         return False
