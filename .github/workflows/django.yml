@@ -40,5 +40,21 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Run Tests
+      env: 
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+        POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+        POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+        DB_HOST: ${{ secrets.DB_HOST }}
+        DB_PORT: ${{ secrets.DB_PORT }}
+        AWS_ACCESS_KEY_ID: ${{ s}}
+        AWS_SECRET_ACCESS_KEY
+        AWS_STORAGE_BUCKET_NAME
+AWS_S3_SIGNATURE_NAME
+AWS_S3_REGION_NAME
+AWS_S3_FILE_OVERWRITE
+AWS_DEFAULT_ACL=None
+AWS_S3_VERITY
+DEFAULT_FILE_STORAGE
       run: |
-        python manage.py test
+        pytest
