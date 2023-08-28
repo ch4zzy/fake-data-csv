@@ -23,5 +23,6 @@ jobs:
         run: |
           cd ./src
           echo "SECRET_KEY=django-insecure-dummy-secret" > config/.env
+          echo "DEBUG=True" > config/.env
           pytest
     
