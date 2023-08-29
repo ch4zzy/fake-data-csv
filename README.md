@@ -13,7 +13,7 @@ http://chazzy.pythonanywhere.com/
 - Download generated datasets in CSV format
 - The files(static for admin and media) are stored on **AWS S3**.
 - Errors tracking by **sentry.io**.
-- CI/CD test runs.
+- CI test runs.
 
 ## Installation
 
