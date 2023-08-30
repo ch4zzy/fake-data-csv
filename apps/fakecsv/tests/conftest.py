@@ -14,11 +14,10 @@ def user_data():
 
 
 @pytest.fixture
-def schema_data(create_test_user):
-
+def schema_data(authenticated_user):
     return {
         "name": "test_schema",
-        "owner": create_test_user,
+        "owner": authenticated_user,
         "delimiter": ",",
         "quote_character": '"',
     }
@@ -54,9 +53,11 @@ def create_test_user(user_data):
 
 
 @pytest.fixture
-def user_client(create_test_user, client, user_data):
+def authenticated_user(client, create_test_user, user_data):
+    user = create_test_user
+    user.save()
     client.login(**user_data)
-    return client
+    return user
 
 
 @pytest.fixture
