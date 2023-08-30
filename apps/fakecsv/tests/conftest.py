@@ -2,6 +2,7 @@ import pytest
 import datetime
 from django.contrib.auth import get_user_model
 from apps.fakecsv.models import Schema, Column, DataSet
+from apps.fakecsv.constants import DataType, Delimiter, QuoteCharacter, Status
 
 
 @pytest.fixture
@@ -14,10 +15,10 @@ def user_data():
 
 
 @pytest.fixture
-def schema_data(authenticated_user):
+def schema_data(create_test_user):
     return {
         "name": "test_schema",
-        "owner": authenticated_user,
+        "owner": create_test_user.id,
         "delimiter": ",",
         "quote_character": '"',
     }
@@ -54,10 +55,8 @@ def create_test_user(user_data):
 
 @pytest.fixture
 def authenticated_user(client, create_test_user, user_data):
-    user = create_test_user
-    user.save()
     client.login(**user_data)
-    return user
+    return client
 
 
 @pytest.fixture
