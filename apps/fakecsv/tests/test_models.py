@@ -3,8 +3,9 @@ from apps.fakecsv.models import Schema, Column, DataSet
 
 
 @pytest.mark.django_db
-def test_schema_model(create_test_schema, schema_data):
+def test_schema_model(create_test_schema, schema_data_models):
     schema = create_test_schema
+    schema_data = schema_data_models
     assert Schema.objects.count() == 1
     assert schema.name == schema_data["name"]
     assert schema.owner == schema_data["owner"]

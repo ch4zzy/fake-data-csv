@@ -25,6 +25,16 @@ def schema_data(create_test_user):
 
 
 @pytest.fixture
+def schema_data_models(create_test_user):
+    return {
+        "name": "test_schema",
+        "owner": create_test_user,
+        "delimiter": ",",
+        "quote_character": '"',
+    }
+
+
+@pytest.fixture
 def column_data(create_test_schema):
     return {
         "name": "test_column",
@@ -60,8 +70,8 @@ def authenticated_user(client, create_test_user, user_data):
 
 
 @pytest.fixture
-def create_test_schema(schema_data):
-    return Schema.objects.create(**schema_data)
+def create_test_schema(schema_data_models):
+    return Schema.objects.create(**schema_data_models)
 
 
 @pytest.fixture
