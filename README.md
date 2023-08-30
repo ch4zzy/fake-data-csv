@@ -16,7 +16,7 @@ http://chazzy.pythonanywhere.com/
 
 1. Clone the repository:
 
-   
+
    git clone <repository_url>
 
 2. Install the required dependencies:
