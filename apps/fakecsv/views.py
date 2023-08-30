@@ -4,6 +4,7 @@ from django.forms import inlineformset_factory
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.text import slugify
+from django.core.exceptions import ValidationError
 
 from apps.fakecsv.constants import Status
 from apps.fakecsv.forms import ColumnForm, DataSet, DataSetForm, SchemaForm
@@ -49,6 +50,15 @@ def create_schema(request):
                     return redirect("fakecsv:edit_column", pk=column.pk)
             else:
                 return redirect("fakecsv:schema_list")
+        else:
+            return render(
+                request,
+                "fakecsv/schema/new_schema.html",
+                {
+                    "form": form,
+                    "error_message": "Form is not valid", 
+                },
+            )
     else:
         form = SchemaForm(initial={"owner": request.user})
 
