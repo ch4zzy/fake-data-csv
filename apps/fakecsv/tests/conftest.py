@@ -25,6 +25,26 @@ def schema_data(create_test_user):
 
 
 @pytest.fixture
+def column_data(create_test_schema):
+    return {
+        "name": "test_column",
+        "schema": create_test_schema,
+        "data_type": "FULL_NAME",
+        "order": 1,
+    }
+
+
+@pytest.fixture
+def data_set_data(create_test_schema):
+    return {
+        "status": "PROCESSING",
+        "file": "",
+        "schema": create_test_schema,
+        "number_of_rows": 10,
+    }
+
+
+@pytest.fixture
 def schema_data_models(create_test_user):
     return {
         "name": "test_schema",
@@ -35,19 +55,17 @@ def schema_data_models(create_test_user):
 
 
 @pytest.fixture
-def column_data(create_test_schema):
+def column_data_models(create_test_schema):
     return {
         "name": "test_column",
         "schema": create_test_schema,
         "data_type": "FULL_NAME",
         "order": 1,
-        "data_range_from": 1,
-        "data_range_to": 10,
     }
 
 
 @pytest.fixture
-def data_set_data(create_test_schema):
+def data_set_data_models(create_test_schema):
     return {
         "status": "PROCESSING",
         "file": "",
@@ -82,3 +100,18 @@ def create_test_schema_with_columns(column_data):
 @pytest.fixture
 def create_test_data_set(data_set_data):
     return DataSet.objects.create(**data_set_data)
+
+
+@pytest.fixture
+def create_test_schema_models(schema_data_models):
+    return Schema.objects.create(**schema_data_models)
+
+
+@pytest.fixture
+def create_test_columns_models(column_data_models):
+    return Column.objects.create(**column_data_models)
+
+
+@pytest.fixture
+def create_test_data_set_models(data_set_data_models):
+    return DataSet.objects.create(**data_set_data_models)
