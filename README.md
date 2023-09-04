@@ -1,5 +1,7 @@
 # FakeCSV
 
+![action status](https://github.com/ch4zzy/fake-data-csv/actions/workflows/django.yml/badge.svg)
+
 FakeCSV is a web application for generating fake CSV datasets based on custom schemas.
 http://chazzy.pythonanywhere.com/
 
@@ -11,6 +13,7 @@ http://chazzy.pythonanywhere.com/
 - Download generated datasets in CSV format
 - The files(static for admin and media) are stored on **AWS S3**.
 - Errors tracking by **sentry.io**.
+- CI test runs.
 
 ## Installation
 
