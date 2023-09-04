@@ -1,6 +1,8 @@
 import pytest
-from apps.fakecsv.utils import generate_data_set
+from apps.fakecsv.utils import generate_data_set, check_file_exists
 from apps.fakecsv.models import Schema, Column, DataSet
+from django.core.files.storage import default_storage
+import boto3
 
 
 @pytest.mark.django_db
@@ -23,4 +25,4 @@ def test_generate_data_set(create_test_columns_models):
     assert dataset.schema == schema
     assert dataset.file == filename
 
-
+    assert default_storage.exists(filename) is True
