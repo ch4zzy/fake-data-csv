@@ -49,6 +49,15 @@ def create_schema(request):
                     return redirect("fakecsv:edit_column", pk=column.pk)
             else:
                 return redirect("fakecsv:schema_list")
+        else:
+            return render(
+                request,
+                "fakecsv/schema/new_schema.html",
+                {
+                    "form": form,
+                    "error_message": "Form is not valid",
+                },
+            )
     else:
         form = SchemaForm(initial={"owner": request.user})
 
