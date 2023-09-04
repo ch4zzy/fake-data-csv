@@ -59,7 +59,7 @@ def column_data_models(create_test_schema):
     return {
         "name": "test_column",
         "schema": create_test_schema,
-        "data_type": "FULL_NAME",
+        "data_type": "full_name",
         "order": 1,
     }
 
