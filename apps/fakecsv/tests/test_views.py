@@ -9,14 +9,14 @@ from apps.fakecsv.models import Schema
 
 
 @pytest.mark.django_db
-def test_user_login(client, create_test_user, user_data):
+def user_login(client, user, user_data):
     url = reverse('fakecsv:login')
     response = client.post(url, user_data)
     assert response.status_code == 302
 
 
 @pytest.mark.django_db
-def test_user_logout(client):
+def user_logout(client):
     url = reverse('fakecsv:logout')
     response = client.get(url)
     assert response.status_code == 302

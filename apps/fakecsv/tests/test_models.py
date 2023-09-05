@@ -32,7 +32,7 @@ def test_column_model(column_model, column_data_models):
 
 
 @pytest.mark.django_db
-def test_dataset_model(data_set_model,data_set_data_models):
+def test_dataset_model(data_set_model, data_set_data_models):
     dataset = data_set_model
     data_set_data = data_set_data_models
     assert Schema.objects.count() == 1

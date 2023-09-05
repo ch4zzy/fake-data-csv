@@ -1,14 +1,13 @@
 import pytest
-from apps.fakecsv.utils import generate_data_set, check_file_exists
+from apps.fakecsv.utils import generate_data_set
 from apps.fakecsv.models import Schema, Column, DataSet
 from django.core.files.storage import default_storage
-import boto3
 
 
 @pytest.mark.django_db
-def test_generate_data_set(create_test_columns_models):
-    schema = create_test_columns_models.schema
-    column = create_test_columns_models
+def test_generate_data_set(column_model):
+    schema = column_model.schema
+    column = column_model
 
     assert Schema.objects.count() == 1
     assert Column.objects.count() == 1
