@@ -55,21 +55,21 @@ def schema_data_models(user):
 
 
 @pytest.fixture
-def column_data_models(schema):
+def column_data_models(schema_model):
     return {
         "name": "test_column",
-        "schema": schema,
+        "schema": schema_model,
         "data_type": "full_name",
         "order": 1,
     }
 
 
 @pytest.fixture
-def data_set_data_models(schema):
+def data_set_data_models(schema_model):
     return {
         "status": "PROCESSING",
         "file": "",
-        "schema": schema,
+        "schema": schema_model,
         "number_of_rows": 10,
     }
 
@@ -88,8 +88,8 @@ def authenticated_user(client, user, user_data):
 
 
 @pytest.fixture
-def schema(schema_data_models):
-    return Schema.objects.create(**schema_data_models)
+def schema(schema_data):
+    return Schema.objects.create(**schema_data)
 
 
 @pytest.fixture
