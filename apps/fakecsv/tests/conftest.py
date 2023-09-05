@@ -1,8 +1,6 @@
 import pytest
-import datetime
 from django.contrib.auth import get_user_model
 from apps.fakecsv.models import Schema, Column, DataSet
-from apps.fakecsv.constants import DataType, Delimiter, QuoteCharacter, Status
 
 
 @pytest.fixture
