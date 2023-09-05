@@ -16,7 +16,6 @@ def schema_list(request):
     """
     View for displaying a list of schemas owned by the user.
     """
-
     user = request.user
     schema = Schema.objects.filter(owner=user.id)
     return render(
@@ -33,7 +32,6 @@ def create_schema(request):
     """
     View for creating a new schema for a CSV file.
     """
-
     if request.method == "POST":
         form = SchemaForm(request.POST)
         if form.is_valid():
@@ -85,7 +83,6 @@ def delete_column(request, pk):
     """
     View for deleting a column in a CSV file schema.
     """
-
     column = get_object_or_404(Column, pk=pk)
     column.delete()
     return redirect("fakecsv:schema_list")
@@ -96,7 +93,6 @@ def edit_schema(request, pk):
     """
     View for editing a schema for a CSV file.
     """
-
     schema = Schema.objects.select_related("owner").get(pk=pk)
     ColumnFormSet = inlineformset_factory(Schema, Column, form=ColumnForm, extra=1, can_delete=True)
     formset_prefix = "column"
@@ -171,7 +167,6 @@ def download_data_set(request, data_set_id):
     """
     View for downloading a generated dataset for a CSV file.
     """
-
     data_set = get_object_or_404(DataSet, id=data_set_id)
     file_path = data_set.file.path
 
