@@ -37,14 +37,7 @@ Schema detail
         {% for field in form %}
         <div class="form-group" style="margin-top: 3px;">
             <label for="{{ field.id_for_label }}"></label>
-            {{ field }}
-            {% if field.errors %}
-            <div class="text-danger">
-                {% for error in field.errors %}
-                <span>{{ error }}</span>
-                {% endfor %}
-            </div>
-            {% endif %}
+            {{ field|as_crispy_field }}
         </div>
         {% endfor %}
         <button class="btn btn-dark" name="action" type="submit" value="submit" style="margin-left: 10px;">Generate

@@ -47,9 +47,11 @@ INSTALLED_APPS = [
     "bootstrap5",
     "crispy_forms",
     "crispy_bootstrap5",
+    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -169,3 +171,10 @@ STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 MEDIA_LOCATION = "media"
 MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/"
 DEFAULT_FILE_STORAGE = "config.storage_backends.MediaStorage"
+
+
+# django-debug-toolbar
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]

@@ -3,8 +3,8 @@ from apps.fakecsv.models import Schema, Column, DataSet
 
 
 @pytest.mark.django_db
-def test_schema_model(create_test_schema_models, schema_data_models):
-    schema = create_test_schema_models
+def test_schema_model(schema_model, schema_data_models):
+    schema = schema_model
     schema_data = schema_data_models
     assert Schema.objects.count() == 1
     assert schema.name == schema_data["name"]
@@ -14,8 +14,8 @@ def test_schema_model(create_test_schema_models, schema_data_models):
 
 
 @pytest.mark.django_db
-def test_column_model(create_test_columns_models, column_data_models):
-    column = create_test_columns_models
+def test_column_model(column_model, column_data_models):
+    column = column_model
     column_data = column_data_models
     assert Schema.objects.count() == 1
     assert Column.objects.count() == 1
@@ -32,8 +32,8 @@ def test_column_model(create_test_columns_models, column_data_models):
 
 
 @pytest.mark.django_db
-def test_dataset_model(create_test_data_set_models ,data_set_data_models):
-    dataset = create_test_data_set_models
+def test_dataset_model(data_set_model, data_set_data_models):
+    dataset = data_set_model
     data_set_data = data_set_data_models
     assert Schema.objects.count() == 1
     assert DataSet.objects.count() == 1
@@ -44,8 +44,8 @@ def test_dataset_model(create_test_data_set_models ,data_set_data_models):
 
 
 @pytest.mark.django_db
-def test_user_model(create_test_user, user_data):
-    user = create_test_user
+def user_model(create_user, user_data):
+    user = create_user
     assert user.username == user_data["username"]
     assert user.email == user_data["email"]
     assert user.check_password(user_data["password"]) is True
