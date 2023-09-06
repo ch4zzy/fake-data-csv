@@ -44,7 +44,9 @@ def fakedata_generator(data_type, value_range):
 
 
 def generate_data_set(schema: Schema, number_of_rows: int) -> None:
-    """Method to generate dataset from schema"""
+    """
+    Method to generate dataset from schema.
+    """
     dataset = DataSet.objects.create(schema=schema, number_of_rows=number_of_rows)
 
     csv.register_dialect(
