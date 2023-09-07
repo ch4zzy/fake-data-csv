@@ -1,5 +1,5 @@
 import pytest 
-from .models import Schema, Column, DataSet
+from fakecsv.models import Schema, Column, DataSet
 
 
 @pytest.mark.django_db

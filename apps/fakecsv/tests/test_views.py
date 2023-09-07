@@ -1,7 +1,7 @@
 import pytest
 from django.urls import reverse
 
-from .models import Schema
+from fakecsv.models import Schema
 
 
 # Tests login-logout 
