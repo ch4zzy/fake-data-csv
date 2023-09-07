@@ -6,8 +6,8 @@ import boto3
 from django.core.files.storage import default_storage
 from faker import Faker
 
-from apps.fakecsv.constants import DataType, Status
-from apps.fakecsv.models import DataSet, Schema
+from .constants import DataType, Status
+from .models import DataSet, Schema
 
 
 def fakedata_generator(data_type, value_range):

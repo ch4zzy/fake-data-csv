@@ -2,13 +2,13 @@
 # all this views now are class based views
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
-from apps.fakecsv.forms import SchemaForm
-from apps.fakecsv.models import Schema, Column
+from .forms import SchemaForm
+from .models import Schema, Column
 from django.forms import inlineformset_factory
-from apps.fakecsv.forms import ColumnForm
-from apps.fakecsv.constants import Status
-from apps.fakecsv.forms import DataSetForm
-from apps.fakecsv.utils import generate_data_set, check_file_exists
+from .forms import ColumnForm
+from .constants import Status
+from .forms import DataSetForm
+from .utils import generate_data_set, check_file_exists
 from django.conf import settings
 from django.http import HttpResponse
 

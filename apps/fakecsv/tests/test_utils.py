@@ -1,6 +1,6 @@
 import pytest
-from apps.fakecsv.utils import generate_data_set
-from apps.fakecsv.models import Schema, Column, DataSet
+from .utils import generate_data_set
+from .models import Schema, Column, DataSet
 from django.core.files.storage import default_storage
 
 
