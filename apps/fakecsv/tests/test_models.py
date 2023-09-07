@@ -1,5 +1,5 @@
 import pytest 
-from apps.fakecsv.models import Schema, Column, DataSet
+from ..models import Schema, Column, DataSet
 
 
 @pytest.mark.django_db

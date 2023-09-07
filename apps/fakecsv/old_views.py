@@ -1,16 +1,15 @@
 # old views
 # all this views now are class based views
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
-from apps.fakecsv.forms import SchemaForm
-from apps.fakecsv.models import Schema, Column
-from django.forms import inlineformset_factory
-from apps.fakecsv.forms import ColumnForm
-from apps.fakecsv.constants import Status
-from apps.fakecsv.forms import DataSetForm
-from apps.fakecsv.utils import generate_data_set, check_file_exists
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
+from django.forms import inlineformset_factory
 from django.http import HttpResponse
+from django.shortcuts import redirect, render
+
+from .constants import Status
+from .forms import ColumnForm, DataSetForm, SchemaForm
+from .models import Column, Schema
+from .utils import check_file_exists, generate_data_set
 
 
 @login_required

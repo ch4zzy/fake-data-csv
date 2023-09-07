@@ -1,7 +1,7 @@
 from django.urls import include, path
 from django.views.generic.base import RedirectView
 
-from apps.fakecsv.views import (  # detail_schema,
+from .views import (
     CreateSchemaView,
     DetailSchemaView,
     EditSchemaView,

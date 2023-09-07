@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-from apps.fakecsv.constants import DataType, Delimiter, QuoteCharacter, Status
+from .constants import DataType, Delimiter, QuoteCharacter, Status
 
 
 class Schema(models.Model):

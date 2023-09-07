@@ -1,6 +1,6 @@
 from django import forms
 
-from apps.fakecsv.models import Column, DataSet, Schema
+from .models import Column, DataSet, Schema
 
 
 class SchemaForm(forms.ModelForm):
