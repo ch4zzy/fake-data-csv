@@ -1,6 +1,8 @@
 import pytest
 from django.contrib.auth import get_user_model
-from apps.fakecsv.models import Schema, Column, DataSet
+from ..models import Schema, Column, DataSet
+
+
 
 
 @pytest.fixture

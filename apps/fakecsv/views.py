@@ -8,10 +8,10 @@ from django.urls import reverse_lazy
 from django.utils.text import slugify
 from django.views.generic import CreateView, ListView, UpdateView, View
 
-from apps.fakecsv.constants import Status
-from apps.fakecsv.forms import ColumnForm, DataSet, DataSetForm, SchemaForm
-from apps.fakecsv.models import Column, Schema
-from apps.fakecsv.utils import check_file_exists, generate_data_set
+from .constants import Status
+from .forms import ColumnForm, DataSet, DataSetForm, SchemaForm
+from .models import Column, Schema
+from .utils import check_file_exists, generate_data_set
 
 
 class SchemaListView(LoginRequiredMixin, ListView):

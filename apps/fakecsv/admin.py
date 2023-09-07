@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from apps.fakecsv.models import Column, DataSet, Schema
+from .models import Column, DataSet, Schema
 
 
 class ColumnInLine(admin.StackedInline):
