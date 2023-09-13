@@ -80,7 +80,7 @@ def check_file_exists(bucket_name, file_key):
     s3 = boto3.client("s3")
 
     try:
-        response = s3.head_object(Bucket=bucket_name, Key=file_key)
+        s3.head_object(Bucket=bucket_name, Key=file_key)
         return True
     except Exception:
         return False
