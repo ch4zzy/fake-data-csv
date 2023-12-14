@@ -31,7 +31,7 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = env.bool("DEBUG")
 
 
-ALLOWED_HOSTS = ["chazzy.pythonanywhere.com", "127.0.0.1"]
+ALLOWED_HOSTS = ["chazzy.pythonanywhere.com", "127.0.0.1", ".vercel.app"]
 
 
 # Application definition
