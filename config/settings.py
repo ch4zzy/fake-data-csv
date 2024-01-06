@@ -31,7 +31,7 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = env.bool("DEBUG")
 
 
-ALLOWED_HOSTS = ["chazzy.pythonanywhere.com", "127.0.0.1"]
+ALLOWED_HOSTS = ["chazzy.pythonanywhere.com", "127.0.0.1", ".vercel.app"]
 
 
 # Application definition
@@ -87,11 +87,11 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": env("POSTGRES_DB"),
+        "NAME": env("POSTGRES_DATABASE"),
         "USER": env("POSTGRES_USER"),
         "PASSWORD": env("POSTGRES_PASSWORD"),
-        "HOST": env("DB_HOST"),
-        "PORT": env.int("DB_PORT"),
+        "HOST": env("POSTGRES_HOST"),
+        "PORT": env.int("POSTGRES_PORT"),
     }
 }
 
